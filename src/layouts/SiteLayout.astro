@@ -31,14 +31,16 @@ const canonical = Astro.site
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap"
       rel="stylesheet"
     />
   </head>
   <body>
-    <div class="noise"></div>
-    <div class="aurora aurora-a"></div>
-    <div class="aurora aurora-b"></div>
+    <div class="noise-layer" aria-hidden="true"></div>
+    <div class="grid-layer" aria-hidden="true"></div>
+    <div class="orb orb-a" aria-hidden="true"></div>
+    <div class="orb orb-b" aria-hidden="true"></div>
+    <div class="orb orb-c" aria-hidden="true"></div>
 
     <SiteHeader />
     <main class="page-shell">
@@ -49,11 +51,30 @@ const canonical = Astro.site
     <script>
       const trigger = document.querySelector("[data-menu-trigger]");
       const nav = document.querySelector("[data-site-nav]");
+      const revealNodes = document.querySelectorAll(".reveal");
 
       if (trigger && nav) {
         trigger.addEventListener("click", () => {
           nav.classList.toggle("open");
         });
+      }
+
+      if ("IntersectionObserver" in window && revealNodes.length > 0) {
+        const revealObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("in-view");
+                revealObserver.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.18 }
+        );
+
+        revealNodes.forEach((node) => revealObserver.observe(node));
+      } else {
+        revealNodes.forEach((node) => node.classList.add("in-view"));
       }
     </script>
   </body>

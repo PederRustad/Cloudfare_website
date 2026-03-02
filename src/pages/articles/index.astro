@@ -10,18 +10,18 @@ const sortedArticles = [...articles].sort((a, b) =>
 
 <SiteLayout
   title="Articles | Bitcoin Strategi"
-  description="Read practical Bitcoin strategy articles focused on fundamentals, risk, and process."
+  description="Practical Bitcoin strategy articles on risk, process, and long-cycle thinking."
 >
-  <section class="hero fade-up delay-1 section">
-    <p class="eyebrow">Articles</p>
-    <h1>Practical Bitcoin guides, written for long-term thinking.</h1>
+  <section class="hero section reveal">
+    <p class="eyebrow">[ Article Archive ]</p>
+    <h1>Strategic notes for disciplined Bitcoin operators.</h1>
     <p class="lead">
-      Start with foundations, then build your own rules for behavior, risk, and
-      portfolio management.
+      Read short, actionable guides to improve execution quality and maintain
+      conviction through volatile periods.
     </p>
   </section>
 
-  <section class="article-list section fade-up delay-2">
+  <section class="article-list section reveal">
     {sortedArticles.map((article) => <ArticleCard article={article} />)}
   </section>
 </SiteLayout>

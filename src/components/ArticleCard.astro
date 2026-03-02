@@ -8,12 +8,13 @@ interface Props {
 const { article } = Astro.props;
 ---
 
-<article class="article-card">
+<article class="article-card reveal">
   <p class="pill">{article.category}</p>
   <h3>
     <a href={`/articles/${article.slug}`}>{article.title}</a>
   </h3>
   <p class="article-summary">{article.description}</p>
+  <a class="article-link" href={`/articles/${article.slug}`}>Read note</a>
   <div class="article-meta">
     <span>{article.readTime}</span>
     <span>{new Date(article.published).toLocaleDateString("nb-NO")}</span>
