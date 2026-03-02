@@ -1,0 +1,21 @@
+---
+import type { Article } from "../data/articles";
+
+interface Props {
+  article: Article;
+}
+
+const { article } = Astro.props;
+---
+
+<article class="article-card">
+  <p class="pill">{article.category}</p>
+  <h3>
+    <a href={`/articles/${article.slug}`}>{article.title}</a>
+  </h3>
+  <p class="article-summary">{article.description}</p>
+  <div class="article-meta">
+    <span>{article.readTime}</span>
+    <span>{new Date(article.published).toLocaleDateString("nb-NO")}</span>
+  </div>
+</article>

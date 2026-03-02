@@ -1,0 +1,76 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import ArticleCard from "../components/ArticleCard.astro";
+import { articles } from "../data/articles";
+
+const featured = articles.slice(0, 3);
+---
+
+<SiteLayout
+  title="Bitcoin Strategi | Calm Strategy for Bitcoin Investors"
+  description="A modern Bitcoin education site focused on process, risk management, and long-term planning."
+>
+  <section class="hero fade-up delay-1 section">
+    <p class="eyebrow">Signal over noise</p>
+    <h1>Build a Bitcoin strategy that still works when the market gets loud.</h1>
+    <p class="lead">
+      Bitcoin Strategi is built for people who want clear frameworks, not hype.
+      Learn fundamentals, define your plan, and execute with less emotion.
+    </p>
+    <div class="inline-actions">
+      <a class="btn primary" href="/articles">Start with articles</a>
+      <a class="btn ghost" href="/about">How we think</a>
+    </div>
+  </section>
+
+  <section class="stat-grid fade-up delay-2 section" aria-label="Highlights">
+    <article class="stat">
+      <p class="stat-value">3</p>
+      <p class="stat-label">Core strategy pillars</p>
+    </article>
+    <article class="stat">
+      <p class="stat-value">0</p>
+      <p class="stat-label">Paid signal channels</p>
+    </article>
+    <article class="stat">
+      <p class="stat-value">1</p>
+      <p class="stat-label">Focus: durable habits</p>
+    </article>
+  </section>
+
+  <section class="grid-two fade-up delay-3 section">
+    <article class="panel">
+      <p class="eyebrow">Method</p>
+      <h2>Process-first investing beats reaction-first investing.</h2>
+      <p>
+        This site is intentionally practical: define your risk, pre-commit your
+        rules, and stay consistent through market cycles.
+      </p>
+      <ul class="bullet-list">
+        <li>Risk sizing before entry timing</li>
+        <li>Routine over prediction</li>
+        <li>Custody and security as part of strategy</li>
+      </ul>
+    </article>
+
+    <article class="panel">
+      <p class="eyebrow">Migration</p>
+      <h2>Now Astro-native and Cloudflare-ready.</h2>
+      <p>
+        The site has moved from traditional WordPress setup to an Astro codebase
+        for faster load times, cleaner control, and simpler deployments.
+      </p>
+      <div class="inline-actions">
+        <a class="btn primary" href="/contact">Request help</a>
+      </div>
+    </article>
+  </section>
+
+  <section class="section fade-up delay-4">
+    <p class="eyebrow">Featured Reads</p>
+    <h2>Start with these practical guides</h2>
+    <div class="article-list section">
+      {featured.map((article) => <ArticleCard article={article} />)}
+    </div>
+  </section>
+</SiteLayout>

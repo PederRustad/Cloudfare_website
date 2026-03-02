@@ -1,0 +1,50 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+---
+
+<SiteLayout
+  title="Contact | Bitcoin Strategi"
+  description="Contact Bitcoin Strategi for feedback, collaboration, or migration support."
+>
+  <section class="hero fade-up delay-1 section">
+    <p class="eyebrow">Contact</p>
+    <h1>Send feedback or collaboration ideas.</h1>
+    <p class="lead">
+      Replace the sample email and form action with your preferred inbox or form
+      backend when you are ready.
+    </p>
+  </section>
+
+  <section class="contact-grid section fade-up delay-2">
+    <article class="contact-card">
+      <p class="eyebrow">Direct</p>
+      <h2>Email</h2>
+      <p>
+        <a href="mailto:hello@bitcoinstrategi.no">hello@bitcoinstrategi.no</a>
+      </p>
+      <p>Target response time: within 48 hours.</p>
+    </article>
+
+    <article class="contact-card">
+      <p class="eyebrow">Form</p>
+      <h2>Simple Contact Form</h2>
+      <form class="contact-form" action="#" method="post">
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" placeholder="Your name" />
+
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" placeholder="you@example.com" />
+
+        <label for="message">Message</label>
+        <textarea
+          id="message"
+          name="message"
+          rows="5"
+          placeholder="How can we help?"
+        ></textarea>
+
+        <button class="btn primary" type="submit">Send message</button>
+      </form>
+    </article>
+  </section>
+</SiteLayout>

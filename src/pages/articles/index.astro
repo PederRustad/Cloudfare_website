@@ -1,0 +1,27 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import ArticleCard from "../../components/ArticleCard.astro";
+import { articles } from "../../data/articles";
+
+const sortedArticles = [...articles].sort((a, b) =>
+  a.published > b.published ? -1 : 1
+);
+---
+
+<SiteLayout
+  title="Articles | Bitcoin Strategi"
+  description="Read practical Bitcoin strategy articles focused on fundamentals, risk, and process."
+>
+  <section class="hero fade-up delay-1 section">
+    <p class="eyebrow">Articles</p>
+    <h1>Practical Bitcoin guides, written for long-term thinking.</h1>
+    <p class="lead">
+      Start with foundations, then build your own rules for behavior, risk, and
+      portfolio management.
+    </p>
+  </section>
+
+  <section class="article-list section fade-up delay-2">
+    {sortedArticles.map((article) => <ArticleCard article={article} />)}
+  </section>
+</SiteLayout>

@@ -1,0 +1,39 @@
+---
+const pathname = Astro.url.pathname;
+
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/articles", label: "Articles" },
+  { href: "/contact", label: "Contact" }
+];
+
+function isActive(path: string, href: string): boolean {
+  if (href === "/") {
+    return path === "/";
+  }
+
+  return path === href || path.startsWith(`${href}/`);
+}
+---
+
+<header class="site-header">
+  <a class="brand" href="/" aria-label="Go to homepage">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span>bitcoinstrategi.no</span>
+  </a>
+
+  <button class="menu-trigger" aria-label="Toggle menu" data-menu-trigger>
+    Menu
+  </button>
+
+  <nav class="site-nav" data-site-nav>
+    {
+      links.map((link) => (
+        <a class={isActive(pathname, link.href) ? "active" : ""} href={link.href}>
+          {link.label}
+        </a>
+      ))
+    }
+  </nav>
+</header>

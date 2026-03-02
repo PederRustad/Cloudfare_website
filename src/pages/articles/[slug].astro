@@ -1,0 +1,51 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import { articles, getArticleBySlug } from "../../data/articles";
+
+export function getStaticPaths() {
+  return articles.map((article) => ({
+    params: { slug: article.slug },
+    props: { article }
+  }));
+}
+
+const { article } = Astro.props;
+const articleData = article ?? getArticleBySlug(Astro.params.slug ?? "");
+
+if (!articleData) {
+  throw new Error("Article not found");
+}
+---
+
+<SiteLayout title={`${articleData.title} | Bitcoin Strategi`} description={articleData.description}>
+  <article class="article-page section fade-up delay-1">
+    <p class="pill">{articleData.category}</p>
+    <h1>{articleData.title}</h1>
+    <div class="meta-row">
+      <span>{articleData.readTime}</span>
+      <span>{new Date(articleData.published).toLocaleDateString("nb-NO")}</span>
+    </div>
+
+    <p>{articleData.description}</p>
+
+    <p>
+      Strong strategy usually comes from reducing decisions, not adding more of
+      them. Your main edge is consistency over time.
+    </p>
+
+    <h2 class="section">Core points</h2>
+    <ul class="simple-list">
+      {articleData.bullets.map((bullet) => <li>{bullet}</li>)}
+    </ul>
+
+    <p class="copy">
+      Keep this page structure as a template. You can later move article content
+      into Markdown files or an external CMS.
+    </p>
+
+    <div class="inline-actions section">
+      <a class="btn ghost" href="/articles">Back to articles</a>
+      <a class="btn primary" href="/contact">Send feedback</a>
+    </div>
+  </article>
+</SiteLayout>

@@ -1,0 +1,11 @@
+/wp-admin/* / 301
+/wp-login.php / 301
+/feed /articles 301
+/category/* /articles 301
+/author/* /about 301
+/2020/* /articles 301
+/2021/* /articles 301
+/2022/* /articles 301
+/2023/* /articles 301
+/2024/* /articles 301
+/2025/* /articles 301
