@@ -15,7 +15,7 @@ function isActive(path: string, href: string): boolean {
   }
 
   if (href.startsWith("/#")) {
-    return path === "/";
+    return false;
   }
 
   return path === href || path.startsWith(`${href}/`);
@@ -38,7 +38,12 @@ function isActive(path: string, href: string): boolean {
   <nav class="site-nav" data-site-nav>
     {
       links.map((link) => (
-        <a class={isActive(pathname, link.href) ? "active" : ""} href={link.href}>
+        <a
+          class={isActive(pathname, link.href) ? "active" : ""}
+          href={link.href}
+          data-nav-link
+          data-nav-target={link.href}
+        >
           {link.label}
         </a>
       ))
