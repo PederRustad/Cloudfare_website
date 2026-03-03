@@ -3,19 +3,17 @@ const pathname = Astro.url.pathname;
 
 const links = [
   { href: "/", label: "Hjem" },
-  { href: "/#tjenester", label: "Tjenester" },
-  { href: "/about", label: "Om oss" },
-  { href: "/articles", label: "Artikler" },
+  { href: "/smb", label: "SMB" },
+  { href: "/enterprise", label: "Enterprise" },
+  { href: "/compliance", label: "Compliance" },
+  { href: "/bransjer", label: "Bransjer" },
+  { href: "/innsikt", label: "Innsikt" },
   { href: "/contact", label: "Kontakt" }
 ];
 
 function isActive(path: string, href: string): boolean {
   if (href === "/") {
     return path === "/";
-  }
-
-  if (href.startsWith("/#")) {
-    return false;
   }
 
   return path === href || path.startsWith(`${href}/`);
@@ -41,8 +39,6 @@ function isActive(path: string, href: string): boolean {
         <a
           class={isActive(pathname, link.href) ? "active" : ""}
           href={link.href}
-          data-nav-link
-          data-nav-target={link.href}
         >
           {link.label}
         </a>

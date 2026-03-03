@@ -3,18 +3,19 @@ import type { Article } from "../data/articles";
 
 interface Props {
   article: Article;
+  basePath?: string;
 }
 
-const { article } = Astro.props;
+const { article, basePath = "/articles" } = Astro.props;
 ---
 
 <article class="article-card">
   <p class="pill">{article.category}</p>
   <h3>
-    <a href={`/articles/${article.slug}`}>{article.title}</a>
+    <a href={`${basePath}/${article.slug}`}>{article.title}</a>
   </h3>
   <p class="article-summary">{article.description}</p>
-  <a class="article-link" href={`/articles/${article.slug}`}>Les artikkel</a>
+  <a class="article-link" href={`${basePath}/${article.slug}`}>Les artikkel</a>
   <div class="article-meta">
     <span>{article.readTime}</span>
     <span>{new Date(article.published).toLocaleDateString("nb-NO")}</span>
