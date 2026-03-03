@@ -15,7 +15,7 @@ const canonical = Astro.site
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="no">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -25,22 +25,20 @@ const canonical = Astro.site
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
-    <meta name="theme-color" content="#ff9f2e" />
+    <meta name="theme-color" content="#f7931a" />
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap"
       rel="stylesheet"
     />
   </head>
   <body>
-    <div class="noise-layer" aria-hidden="true"></div>
-    <div class="grid-layer" aria-hidden="true"></div>
-    <div class="orb orb-a" aria-hidden="true"></div>
-    <div class="orb orb-b" aria-hidden="true"></div>
-    <div class="orb orb-c" aria-hidden="true"></div>
+    <div class="noise" aria-hidden="true"></div>
+    <div class="aurora aurora-a" aria-hidden="true"></div>
+    <div class="aurora aurora-b" aria-hidden="true"></div>
 
     <SiteHeader />
     <main class="page-shell">
@@ -51,30 +49,11 @@ const canonical = Astro.site
     <script>
       const trigger = document.querySelector("[data-menu-trigger]");
       const nav = document.querySelector("[data-site-nav]");
-      const revealNodes = document.querySelectorAll(".reveal");
 
       if (trigger && nav) {
         trigger.addEventListener("click", () => {
           nav.classList.toggle("open");
         });
-      }
-
-      if ("IntersectionObserver" in window && revealNodes.length > 0) {
-        const revealObserver = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("in-view");
-                revealObserver.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.18 }
-        );
-
-        revealNodes.forEach((node) => revealObserver.observe(node));
-      } else {
-        revealNodes.forEach((node) => node.classList.add("in-view"));
       }
     </script>
   </body>

@@ -3,47 +3,45 @@ import SiteLayout from "../layouts/SiteLayout.astro";
 ---
 
 <SiteLayout
-  title="Contact | Bitcoin Strategi"
-  description="Contact Bitcoin Strategi for feedback, partnerships, or strategy support."
+  title="Kontakt | Bitcoin Strategi"
+  description="Kontakt oss for strategisamtale, rådgivning eller spørsmål om bitcoin-risiko."
 >
-  <section class="hero section reveal">
-    <p class="eyebrow">[ Contact ]</p>
-    <h1>Send feedback, ideas, or collaboration requests.</h1>
+  <section class="hero fade-up delay-1 section">
+    <p class="eyebrow">Kontakt</p>
+    <h1>Ta kontakt for en uforpliktende strategisamtale.</h1>
     <p class="lead">
-      Keep the form for layout now, then connect it later to your preferred form
-      backend or Cloudflare Worker endpoint.
+      Vi svarer raskt og konkret. Målet er å avklare hva som faktisk er neste
+      riktige steg for deg.
     </p>
   </section>
 
-  <section class="contact-grid section reveal">
+  <section class="contact-grid section fade-up delay-2">
     <article class="contact-card">
-      <p class="eyebrow">[ Direct ]</p>
-      <h2>Email</h2>
-      <p>
-        <a href="mailto:hello@bitcoinstrategi.no">hello@bitcoinstrategi.no</a>
-      </p>
-      <p>Typical response time: within 48 hours.</p>
+      <p class="eyebrow">Direkte</p>
+      <h2>E-post</h2>
+      <p><a href="mailto:hello@bitcoinstrategi.no">hello@bitcoinstrategi.no</a></p>
+      <p>Normal svartid: innen 1-2 virkedager.</p>
     </article>
 
     <article class="contact-card">
-      <p class="eyebrow">[ Form ]</p>
-      <h2>Message desk</h2>
+      <p class="eyebrow">Melding</p>
+      <h2>Kontaktform</h2>
       <form class="contact-form" action="#" method="post">
-        <label for="name">Name</label>
-        <input id="name" name="name" type="text" placeholder="Your name" />
+        <label for="name">Navn</label>
+        <input id="name" name="name" type="text" placeholder="Ditt navn" />
 
-        <label for="email">Email</label>
-        <input id="email" name="email" type="email" placeholder="you@example.com" />
+        <label for="email">E-post</label>
+        <input id="email" name="email" type="email" placeholder="deg@firma.no" />
 
-        <label for="message">Message</label>
+        <label for="message">Melding</label>
         <textarea
           id="message"
           name="message"
           rows="5"
-          placeholder="How can we help?"
+          placeholder="Hva ønsker du hjelp med?"
         ></textarea>
 
-        <button class="btn primary" type="submit">Send message</button>
+        <button class="btn primary" type="submit">Send melding</button>
       </form>
     </article>
   </section>

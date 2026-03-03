@@ -2,14 +2,19 @@
 const pathname = Astro.url.pathname;
 
 const links = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/articles", label: "Articles" },
-  { href: "/contact", label: "Contact" }
+  { href: "/", label: "Hjem" },
+  { href: "/#tjenester", label: "Tjenester" },
+  { href: "/about", label: "Om oss" },
+  { href: "/articles", label: "Artikler" },
+  { href: "/contact", label: "Kontakt" }
 ];
 
 function isActive(path: string, href: string): boolean {
   if (href === "/") {
+    return path === "/";
+  }
+
+  if (href.startsWith("/#")) {
     return path === "/";
   }
 
@@ -18,28 +23,25 @@ function isActive(path: string, href: string): boolean {
 ---
 
 <header class="site-header">
-  <a class="brand" href="/" aria-label="Go to homepage">
+  <a class="brand" href="/" aria-label="Gå til forsiden">
     <span class="brand-mark" aria-hidden="true">B</span>
     <span class="brand-copy">
       bitcoinstrategi.no
-      <small>[ long-term desk ]</small>
+      <small>Strategisk bitcoin-rådgivning</small>
     </span>
   </a>
 
-  <button class="menu-trigger" aria-label="Toggle menu" data-menu-trigger>
-    Menu
+  <button class="menu-trigger" aria-label="Åpne meny" data-menu-trigger>
+    Meny
   </button>
 
-  <div class="header-right">
-    <nav class="site-nav" data-site-nav>
-      {
-        links.map((link) => (
-          <a class={isActive(pathname, link.href) ? "active" : ""} href={link.href}>
-            {link.label}
-          </a>
-        ))
-      }
-    </nav>
-    <a class="header-cta" href="/articles">Read the playbook</a>
-  </div>
+  <nav class="site-nav" data-site-nav>
+    {
+      links.map((link) => (
+        <a class={isActive(pathname, link.href) ? "active" : ""} href={link.href}>
+          {link.label}
+        </a>
+      ))
+    }
+  </nav>
 </header>
