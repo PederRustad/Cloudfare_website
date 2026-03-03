@@ -354,10 +354,13 @@ a {
 .network-illustration {
   position: relative;
   margin-top: 0.95rem;
-  height: 8.2rem;
-  border: 1px solid rgba(129, 219, 255, 0.24);
+  height: 11.2rem;
+  border: 1px solid rgba(88, 170, 240, 0.3);
   border-radius: 0.78rem;
-  background: linear-gradient(180deg, rgba(10, 17, 29, 0.94), rgba(7, 12, 21, 0.86));
+  background:
+    radial-gradient(circle at 38% -4%, rgba(24, 93, 166, 0.28), transparent 52%),
+    radial-gradient(circle at 70% 120%, rgba(9, 55, 106, 0.22), transparent 58%),
+    linear-gradient(180deg, rgba(5, 16, 30, 0.96), rgba(4, 11, 22, 0.94));
   overflow: hidden;
 }
 
@@ -366,66 +369,149 @@ a {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 22% 20%, rgba(90, 203, 248, 0.14), transparent 42%),
-    radial-gradient(circle at 78% 74%, rgba(247, 147, 26, 0.16), transparent 48%);
+    radial-gradient(circle at 26% 16%, rgba(90, 203, 248, 0.17), transparent 40%),
+    radial-gradient(circle at 84% 76%, rgba(247, 147, 26, 0.12), transparent 48%);
 }
 
-.network-lines {
+.network-illustration::after {
+  content: "";
   position: absolute;
   inset: 0;
+  background: linear-gradient(90deg, rgba(4, 10, 20, 0.06) 0%, rgba(4, 10, 20, 0.34) 100%);
+}
+
+.network-world,
+.network-lines,
+.network-flow,
+.network-nodes {
+  position: absolute;
+  inset: 0;
+}
+
+.network-world {
   width: 100%;
   height: 100%;
   z-index: 1;
 }
 
-.network-lines line {
-  stroke: rgba(129, 219, 255, 0.4);
+.network-world path {
+  fill: rgba(21, 54, 90, 0.42);
+  stroke: rgba(72, 128, 185, 0.28);
+  stroke-width: 1;
+  filter: drop-shadow(0 0 7px rgba(50, 130, 208, 0.16));
+}
+
+.network-lines {
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.network-lines path {
+  fill: none;
+  stroke: rgba(36, 134, 232, 0.22);
+  stroke-width: 1.08px;
+  stroke-linecap: round;
+  animation: lineFlow 12s linear infinite;
+}
+
+.network-lines path.core {
+  stroke: rgba(74, 175, 255, 0.38);
+  stroke-width: 1.48px;
+}
+
+.network-flow {
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  mix-blend-mode: screen;
+}
+
+.network-flow path {
+  fill: none;
+  stroke: rgba(132, 221, 255, 0.75);
   stroke-width: 1.3px;
   stroke-linecap: round;
-  stroke-dasharray: 4 7;
-  animation: lineFlow 8s linear infinite;
+  stroke-dasharray: 2 22;
+  animation: trafficFlow 4.8s linear infinite;
+}
+
+.network-flow path:nth-child(2) {
+  animation-delay: 0.65s;
+}
+
+.network-flow path:nth-child(3) {
+  animation-delay: 1.3s;
+}
+
+.network-flow path:nth-child(4) {
+  animation-delay: 1.95s;
+}
+
+.network-flow path:nth-child(5) {
+  animation-delay: 2.5s;
+}
+
+.network-flow path:nth-child(6) {
+  animation-delay: 3.1s;
+}
+
+.network-nodes {
+  z-index: 4;
 }
 
 .node {
   position: absolute;
-  width: 0.66rem;
+  left: var(--x);
+  top: var(--y);
+  width: var(--s, 0.37rem);
   aspect-ratio: 1;
   border-radius: 999px;
-  border: 1px solid rgba(160, 228, 255, 0.92);
-  background: linear-gradient(180deg, #daf3ff, #84dafd);
-  box-shadow: 0 0 0 0 rgba(90, 203, 248, 0.46);
-  z-index: 2;
-  animation: pulseNode 2.5s ease-out infinite;
+  color: #5fc7ff;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle at 35% 30%, #dbf7ff 0%, #6cc6ff 68%);
+  box-shadow:
+    0 0 13px rgba(63, 176, 255, 0.5);
+  opacity: 0.96;
+  animation: pulseNode 3.6s ease-out infinite;
+  animation-delay: var(--delay, 0s);
 }
 
-.node-a {
-  left: 8%;
-  top: 75%;
-  animation-delay: 0s;
+.node::after {
+  content: "";
+  position: absolute;
+  inset: -0.28rem;
+  border-radius: inherit;
+  border: 1px solid currentColor;
+  opacity: 0;
+  transform: scale(0.45);
+  animation: nodeRing 3.6s ease-out infinite;
+  animation-delay: inherit;
 }
 
-.node-b {
-  left: 27%;
-  top: 45%;
-  animation-delay: 320ms;
+.node.hub {
+  --s: 0.54rem;
+  color: #84d7ff;
+  box-shadow:
+    0 0 18px rgba(76, 183, 255, 0.7);
 }
 
-.node-c {
-  left: 47.5%;
-  top: 22%;
-  animation-delay: 640ms;
+.node.warm {
+  color: #f9a24b;
+  background: radial-gradient(circle at 35% 30%, #ffdcb3 0%, #ff9a4a 68%);
+  box-shadow: 0 0 12px rgba(247, 147, 26, 0.48);
 }
 
-.node-d {
-  left: 70.5%;
-  top: 46%;
-  animation-delay: 960ms;
+.node.mint {
+  color: #57e1bd;
+  background: radial-gradient(circle at 35% 30%, #d4ffe8 0%, #61e6c1 68%);
+  box-shadow: 0 0 12px rgba(68, 227, 178, 0.5);
 }
 
-.node-e {
-  left: 88%;
-  top: 75%;
-  animation-delay: 1280ms;
+.node.pink {
+  color: #d18bff;
+  background: radial-gradient(circle at 35% 30%, #ffe2ff 0%, #cf7dff 68%);
+  box-shadow: 0 0 12px rgba(207, 125, 255, 0.45);
 }
 
 .modules-grid {
@@ -873,28 +959,63 @@ a {
 
 @keyframes lineFlow {
   0% {
-    stroke-dashoffset: 0;
+    opacity: 0.35;
+    filter: drop-shadow(0 0 2px rgba(72, 175, 255, 0.1));
+  }
+
+  50% {
+    opacity: 0.72;
+    filter: drop-shadow(0 0 5px rgba(72, 175, 255, 0.28));
   }
 
   100% {
-    stroke-dashoffset: -240;
+    opacity: 0.4;
+    filter: drop-shadow(0 0 2px rgba(72, 175, 255, 0.1));
+  }
+}
+
+@keyframes trafficFlow {
+  0% {
+    stroke-dashoffset: 0;
+    opacity: 0.12;
+  }
+
+  35% {
+    opacity: 1;
+  }
+
+  100% {
+    stroke-dashoffset: -190;
+    opacity: 0.08;
   }
 }
 
 @keyframes pulseNode {
   0%,
   100% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(90, 203, 248, 0);
+    transform: translate(-50%, -50%) scale(0.92);
+    opacity: 0.88;
   }
 
   45% {
-    transform: scale(1.08);
-    box-shadow: 0 0 0 0 rgba(90, 203, 248, 0.48);
+    transform: translate(-50%, -50%) scale(1.08);
+    opacity: 1;
+  }
+}
+
+@keyframes nodeRing {
+  0% {
+    opacity: 0;
+    transform: scale(0.45);
+  }
+
+  30% {
+    opacity: 0.44;
   }
 
   100% {
-    box-shadow: 0 0 0 12px rgba(90, 203, 248, 0);
+    opacity: 0;
+    transform: scale(1.75);
   }
 }
 
