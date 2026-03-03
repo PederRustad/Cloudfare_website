@@ -804,6 +804,25 @@ a {
   max-width: 74ch;
 }
 
+.article-page .article-lead {
+  margin-top: 0.9rem;
+  color: #c5d4eb;
+  font-size: 1.03rem;
+}
+
+.article-page h2 {
+  margin-top: 1.3rem;
+  font-size: clamp(1.2rem, 2vw, 1.55rem);
+}
+
+.article-page .article-block h2 {
+  margin-top: 0;
+}
+
+.article-page .key-points {
+  margin-top: 0.65rem;
+}
+
 .copy {
   margin-top: 1rem;
   color: var(--muted);
