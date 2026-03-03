@@ -35,7 +35,7 @@ const canonical = Astro.site
       rel="stylesheet"
     />
   </head>
-  <body>
+  <body data-pathname={Astro.url.pathname}>
     <div class="noise" aria-hidden="true"></div>
     <div class="aurora aurora-a" aria-hidden="true"></div>
     <div class="aurora aurora-b" aria-hidden="true"></div>
@@ -49,11 +49,72 @@ const canonical = Astro.site
     <script>
       const trigger = document.querySelector("[data-menu-trigger]");
       const nav = document.querySelector("[data-site-nav]");
+      const revealNodes = document.querySelectorAll(".reveal");
 
       if (trigger && nav) {
         trigger.addEventListener("click", () => {
           nav.classList.toggle("open");
         });
+      }
+
+      if ("IntersectionObserver" in window && revealNodes.length > 0) {
+        const revealObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("in-view");
+                revealObserver.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.2 }
+        );
+
+        revealNodes.forEach((node) => revealObserver.observe(node));
+      } else {
+        revealNodes.forEach((node) => node.classList.add("in-view"));
+      }
+
+      const pathname = document.body.dataset.pathname || "/";
+      if (pathname === "/") {
+        const homeLink = document.querySelector('[data-nav-target="/"]');
+        const servicesLink = document.querySelector('[data-nav-target="/#tjenester"]');
+        const servicesSection = document.querySelector("#tjenester");
+
+        const setActive = (activeLink) => {
+          if (!(homeLink instanceof HTMLElement) || !(servicesLink instanceof HTMLElement)) {
+            return;
+          }
+
+          homeLink.classList.remove("active");
+          servicesLink.classList.remove("active");
+
+          if (activeLink instanceof HTMLElement) {
+            activeLink.classList.add("active");
+          }
+        };
+
+        setActive(homeLink);
+
+        if (servicesSection instanceof HTMLElement && "IntersectionObserver" in window) {
+          const navObserver = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  setActive(servicesLink);
+                } else {
+                  setActive(homeLink);
+                }
+              });
+            },
+            {
+              rootMargin: "-35% 0px -55% 0px",
+              threshold: 0
+            }
+          );
+
+          navObserver.observe(servicesSection);
+        }
       }
     </script>
   </body>

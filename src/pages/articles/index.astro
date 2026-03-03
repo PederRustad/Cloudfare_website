@@ -12,7 +12,7 @@ const sortedArticles = [...articles].sort((a, b) =>
   title="Artikler | Bitcoin Strategi"
   description="Praktiske artikler om bitcoin-strategi, risikostyring og langsiktig beslutningsstruktur."
 >
-  <section class="hero fade-up delay-1 section">
+  <section class="hero reveal delay-1 section">
     <p class="eyebrow">Artikler</p>
     <h1>Innsikt skrevet for rolige og langsiktige beslutninger.</h1>
     <p class="lead">
@@ -20,7 +20,7 @@ const sortedArticles = [...articles].sort((a, b) =>
     </p>
   </section>
 
-  <section class="article-list section fade-up delay-2">
+  <section class="article-list section reveal delay-2">
     {sortedArticles.map((article) => <ArticleCard article={article} />)}
   </section>
 </SiteLayout>
