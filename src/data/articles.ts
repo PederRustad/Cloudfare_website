@@ -10,45 +10,45 @@ export type Article = {
 
 export const articles: Article[] = [
   {
-    slug: "first-principles",
-    title: "Bitcoin First Principles, Without the Noise",
+    slug: "forste-prinsipper",
+    title: "Bitcoin forklart med første prinsipper",
     description:
-      "A beginner-friendly breakdown of scarcity, decentralization, and self-custody.",
-    category: "Foundations",
-    published: "2026-03-02",
-    readTime: "5 min read",
+      "En enkel introduksjon til knapphet, desentralisering og hvorfor custody er avgjørende.",
+    category: "Fundament",
+    published: "2026-03-03",
+    readTime: "5 min lesing",
     bullets: [
-      "What problem Bitcoin solves",
-      "Why fixed supply matters",
-      "How custody changes your risk profile"
+      "Hvilket problem Bitcoin prøver å løse",
+      "Hvorfor fast tilbud betyr noe over tid",
+      "Hva som skjer med risiko når du tar egen custody"
     ]
   },
   {
-    slug: "cycle-plan",
-    title: "Build a Cycle Plan You Can Actually Follow",
+    slug: "syklusplan",
+    title: "Slik lager du en syklusplan du faktisk følger",
     description:
-      "A practical framework for buy rules, risk limits, and emotional control.",
-    category: "Planning",
-    published: "2026-03-02",
-    readTime: "6 min read",
+      "Konkrete regler for kjøp, risikostyring og oppfølging gjennom hele markedssyklusen.",
+    category: "Strategi",
+    published: "2026-03-03",
+    readTime: "6 min lesing",
     bullets: [
-      "Set contribution rules before volatility starts",
-      "Use position sizing instead of prediction",
-      "Design your plan for bad days, not good days"
+      "Bestem tidshorisont før du handler",
+      "Bruk faste intervaller i stedet for magefølelse",
+      "Definer tydelige grenser for risiko og likviditet"
     ]
   },
   {
-    slug: "portfolio-hygiene",
-    title: "Portfolio Hygiene: 7 Checks Before You Add Risk",
+    slug: "portefoljehygiene",
+    title: "Porteføljehygiene: sjekkliste før du øker risiko",
     description:
-      "A short checklist to keep your Bitcoin plan disciplined and boring.",
-    category: "Risk",
-    published: "2026-03-02",
-    readTime: "4 min read",
+      "Syv kontroller som holder beslutningene rolige når markedet er alt annet enn rolig.",
+    category: "Risiko",
+    published: "2026-03-03",
+    readTime: "4 min lesing",
     bullets: [
-      "Recheck your time horizon",
-      "Audit custody and backups",
-      "Avoid leverage if your plan is long-term"
+      "Revurder total eksponering mot én aktivaklasse",
+      "Dobbeltsjekk backup- og nøkkelrutiner",
+      "Unngå gearing i en langsiktig strategi"
     ]
   }
 ];

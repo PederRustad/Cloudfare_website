@@ -13,7 +13,7 @@ const { article } = Astro.props;
 const articleData = article ?? getArticleBySlug(Astro.params.slug ?? "");
 
 if (!articleData) {
-  throw new Error("Article not found");
+  throw new Error("Artikkel ikke funnet");
 }
 ---
 
@@ -29,23 +29,23 @@ if (!articleData) {
     <p>{articleData.description}</p>
 
     <p>
-      Strong strategy usually comes from reducing decisions, not adding more of
-      them. Your main edge is consistency over time.
+      En robust bitcoin-strategi handler ofte om å redusere antall improviserte
+      valg. Når rammene er klare, blir gjennomføringen roligere.
     </p>
 
-    <h2 class="section">Core points</h2>
+    <h2 class="section">Hovedpunkter</h2>
     <ul class="simple-list">
       {articleData.bullets.map((bullet) => <li>{bullet}</li>)}
     </ul>
 
     <p class="copy">
-      Keep this page structure as a template. You can later move article content
-      into Markdown files or an external CMS.
+      Disse artiklene er korte med vilje: rask oversikt, konkrete tiltak og lav
+      terskel for å gjøre neste riktige steg.
     </p>
 
     <div class="inline-actions section">
-      <a class="btn ghost" href="/articles">Back to articles</a>
-      <a class="btn primary" href="/contact">Send feedback</a>
+      <a class="btn ghost" href="/articles">Tilbake til artikler</a>
+      <a class="btn primary" href="/contact">Kontakt oss</a>
     </div>
   </article>
 </SiteLayout>
