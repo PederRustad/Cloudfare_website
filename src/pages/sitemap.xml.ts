@@ -1,14 +1,25 @@
 import type { APIRoute } from "astro";
 import { articles } from "../data/articles";
 
-const staticPaths = ["/", "/about", "/contact", "/articles"];
+const staticPaths = [
+  "/",
+  "/about",
+  "/contact",
+  "/smb",
+  "/enterprise",
+  "/compliance",
+  "/bransjer",
+  "/innsikt",
+  "/articles"
+];
 
 export const GET: APIRoute = ({ site }) => {
   const baseUrl = site ?? new URL("http://localhost:4321");
 
   const urls = [
     ...staticPaths,
-    ...articles.map((article) => `/articles/${article.slug}`)
+    ...articles.map((article) => `/articles/${article.slug}`),
+    ...articles.map((article) => `/innsikt/${article.slug}`)
   ];
 
   const xmlBody = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls

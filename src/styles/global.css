@@ -178,11 +178,11 @@ a {
 .site-nav a {
   text-decoration: none;
   color: var(--muted);
-  padding: 0.46rem 0.72rem;
+  padding: 0.42rem 0.58rem;
   border-radius: 0.62rem;
   border: 1px solid transparent;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.89rem;
   transition: border-color 180ms ease, background 180ms ease, color 180ms ease;
 }
 
@@ -264,6 +264,26 @@ a {
   color: var(--muted);
   max-width: 70ch;
   font-size: clamp(1rem, 1.3vw, 1.16rem);
+}
+
+.stat-strip {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+.stat-card {
+  border: 1px solid rgba(129, 219, 255, 0.25);
+  border-radius: 0.68rem;
+  padding: 0.62rem 0.68rem;
+  background: rgba(7, 16, 30, 0.58);
+}
+
+.stat-card h3 {
+  margin-top: 0.38rem;
+  font-size: clamp(0.84rem, 1vw, 0.92rem);
+  line-height: 1.35;
 }
 
 .inline-actions {
@@ -520,6 +540,13 @@ a {
   gap: 0.9rem;
 }
 
+.segment-grid,
+.offer-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
 .module-card,
 .panel,
 .process-card,
@@ -673,6 +700,10 @@ a {
   gap: 0.9rem;
 }
 
+.process-grid-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
 .process-card {
   padding: 1rem;
 }
@@ -719,6 +750,14 @@ a {
 .panel p {
   margin-top: 0.58rem;
   color: var(--muted);
+}
+
+.price-tag {
+  margin-top: 0.7rem;
+  color: #ffe0b2;
+  font: 700 0.76rem/1.2 "Space Mono", monospace;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .panel-accent {
@@ -843,6 +882,7 @@ a {
 }
 
 .contact-form input,
+.contact-form select,
 .contact-form textarea {
   width: 100%;
   border: 1px solid var(--line-strong);
@@ -854,6 +894,7 @@ a {
 }
 
 .contact-form input:focus-visible,
+.contact-form select:focus-visible,
 .contact-form textarea:focus-visible {
   outline: 1px solid rgba(247, 147, 26, 0.68);
   border-color: rgba(247, 147, 26, 0.68);
@@ -1070,6 +1111,9 @@ a {
 
 @media (max-width: 1020px) {
   .hero-split,
+  .stat-strip,
+  .segment-grid,
+  .offer-grid,
   .modules-grid,
   .process-grid,
   .grid-two,

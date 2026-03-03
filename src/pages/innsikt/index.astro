@@ -1,0 +1,45 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import ArticleCard from "../../components/ArticleCard.astro";
+import { articles } from "../../data/articles";
+
+const sortedArticles = [...articles].sort((a, b) =>
+  a.published > b.published ? -1 : 1
+);
+---
+
+<SiteLayout
+  title="Innsikt | Bitcoin Strategi"
+  description="Artikler, whitepaper og webinar for norske bedriftsledere som vurderer bitcoinstrategi."
+>
+  <section class="hero reveal delay-1 section">
+    <p class="eyebrow">Innsikt</p>
+    <h1>Praktiske ressurser for ledelse, styre og økonomifunksjon.</h1>
+    <p class="lead">
+      Her finner du artikler om strategi, risiko, governance og implementering
+      av bitcoin i virksomhet.
+    </p>
+  </section>
+
+  <section class="grid-three section reveal delay-2">
+    <article class="panel">
+      <p class="eyebrow">Format</p>
+      <h2>Artikler</h2>
+      <p>Korte analyser med konkrete beslutningsrammer.</p>
+    </article>
+    <article class="panel">
+      <p class="eyebrow">Format</p>
+      <h2>Whitepaper</h2>
+      <p>Snart: policy-maler og styringsmodeller for bedrifter.</p>
+    </article>
+    <article class="panel">
+      <p class="eyebrow">Format</p>
+      <h2>Webinar</h2>
+      <p>Snart: ledelsesbrief med kvartalsvis oppdatering.</p>
+    </article>
+  </section>
+
+  <section class="article-list section reveal delay-3">
+    {sortedArticles.map((article) => <ArticleCard article={article} basePath="/innsikt" />)}
+  </section>
+</SiteLayout>
