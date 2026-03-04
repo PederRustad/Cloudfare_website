@@ -1,7 +1,7 @@
 :root {
-  --bg: #08111f;
-  --bg-soft: #0f1b2f;
-  --card: rgba(17, 29, 47, 0.78);
+  --bg: #0b0d12;
+  --bg-soft: #11141b;
+  --card: rgba(17, 20, 27, 0.72);
   --card-strong: rgba(13, 22, 36, 0.95);
   --ink: #eff4ff;
   --muted: #9db0cd;
@@ -33,9 +33,9 @@ body {
   font-family: "Manrope", "Segoe UI", sans-serif;
   line-height: 1.58;
   background:
-    radial-gradient(circle at 8% 10%, rgba(247, 147, 26, 0.19), transparent 38%),
-    radial-gradient(circle at 84% 18%, rgba(90, 203, 248, 0.16), transparent 34%),
-    linear-gradient(180deg, #0b1424 0%, #08111f 58%, #050a13 100%);
+    radial-gradient(circle at 10% 6%, rgba(247, 147, 26, 0.12), transparent 30%),
+    radial-gradient(circle at 85% 12%, rgba(90, 203, 248, 0.08), transparent 28%),
+    linear-gradient(180deg, #0f1218 0%, #0b0d12 56%, #090b0f 100%);
 }
 
 h1,
@@ -980,6 +980,65 @@ a {
   opacity: 1;
   transform: translateY(0);
   filter: blur(0);
+}
+
+/* Homepage: cleaner, editorial dark style */
+.home-clean .hero,
+.home-clean .panel,
+.home-clean .module-card {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.home-clean .hero {
+  padding: clamp(1.2rem, 2.8vw, 2.2rem) 0 1.2rem;
+  border-bottom: 1px solid rgba(167, 176, 192, 0.22);
+}
+
+.home-clean .hero::after {
+  opacity: 0.35;
+}
+
+.home-clean .grid-two {
+  gap: 1.8rem;
+}
+
+.home-clean .panel {
+  padding: 0.4rem 0 1rem;
+  border-top: 1px solid rgba(167, 176, 192, 0.18);
+}
+
+.home-clean .panel-accent {
+  border-color: rgba(247, 147, 26, 0.35);
+}
+
+.home-clean .offer-grid {
+  grid-template-columns: 1fr;
+  gap: 0;
+  border-top: 1px solid rgba(167, 176, 192, 0.18);
+}
+
+.home-clean .module-card {
+  padding: 0.9rem 0;
+  border-bottom: 1px solid rgba(167, 176, 192, 0.18);
+}
+
+.home-clean .module-card h3 {
+  font-size: 1.08rem;
+}
+
+.home-clean .section {
+  margin-top: 1.8rem;
+}
+
+.home-clean .inline-actions {
+  margin-top: 1rem;
+}
+
+.home-clean .btn.ghost {
+  background: transparent;
 }
 
 .delay-1 {
