@@ -38,6 +38,23 @@ body {
     linear-gradient(180deg, #0f1218 0%, #0b0d12 56%, #090b0f 100%);
 }
 
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -2;
+  opacity: 0.24;
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(132, 215, 255, 0.18) 1.2px, transparent 1.2px),
+    radial-gradient(circle at 36% 60%, rgba(247, 147, 26, 0.14) 1px, transparent 1px),
+    radial-gradient(circle at 68% 28%, rgba(132, 215, 255, 0.16) 1.1px, transparent 1.1px),
+    radial-gradient(circle at 84% 72%, rgba(95, 230, 190, 0.12) 1px, transparent 1px),
+    linear-gradient(120deg, transparent 24%, rgba(107, 166, 224, 0.08) 24.3%, transparent 25%),
+    linear-gradient(35deg, transparent 54%, rgba(107, 166, 224, 0.06) 54.3%, transparent 55%);
+  background-size: 420px 320px, 520px 380px, 600px 420px, 560px 460px, 520px 360px, 620px 430px;
+}
+
 h1,
 h2,
 h3,
@@ -1029,23 +1046,10 @@ a {
 
 .global-network .flow {
   fill: none;
-  stroke: rgba(145, 222, 255, 0.68);
-  stroke-width: 1.5;
+  stroke: rgba(145, 222, 255, 0.5);
+  stroke-width: 1.4;
   stroke-linecap: round;
-  stroke-dasharray: 2 22;
-  animation: networkFlow 7.2s linear infinite;
-}
-
-.global-network .flow:nth-of-type(2) {
-  animation-delay: 0.5s;
-}
-
-.global-network .flow:nth-of-type(3) {
-  animation-delay: 1.1s;
-}
-
-.global-network .flow:nth-of-type(4) {
-  animation-delay: 1.7s;
+  stroke-dasharray: 2 18;
 }
 
 .global-network .node {
@@ -1058,8 +1062,6 @@ a {
   transform: translate(-50%, -50%);
   background: radial-gradient(circle at 35% 30%, #dff6ff 0%, #70c9ff 70%);
   box-shadow: 0 0 9px rgba(88, 196, 255, 0.45);
-  animation: networkPulse 4.8s ease-in-out infinite;
-  animation-delay: var(--d);
 }
 
 .global-network .node.hub {
