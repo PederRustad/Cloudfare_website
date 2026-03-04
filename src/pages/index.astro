@@ -22,6 +22,43 @@ import SiteLayout from "../layouts/SiteLayout.astro";
     </article>
   </section>
 
+  <section class="global-network section reveal delay-2" aria-labelledby="network-title">
+    <p class="eyebrow">Globalt nettverk</p>
+    <h2 id="network-title">Beslutninger i et globalt marked.</h2>
+    <p class="lead">
+      Visualisering av noder, forbindelser og flyt – laget for mørk bakgrunn.
+    </p>
+
+    <div class="network-stage" aria-hidden="true">
+      <svg viewBox="0 0 900 420" class="network-svg" role="presentation">
+        <path class="land" d="M80 160l40-40 90-20 70 15 30 30-10 40-60 30-85 8-55-15-30-25z" />
+        <path class="land" d="M280 260l55-8 35 20-10 55-40 38-35-20-18-35z" />
+        <path class="land" d="M390 120l40-22 90-10 95 18 42 36-16 35-65 24-100 4-54-24z" />
+        <path class="land" d="M560 200l70 10 40 30-15 45-55 28-40-20-15-38z" />
+        <path class="land" d="M660 150l95-18 130 14 75 42-12 36-98 32-110-4-75-34z" />
+        <path class="land" d="M820 285l75-14 55 20 16 35-40 30-75 4-42-24z" />
+
+        <path class="line" d="M180 180 Q360 140 520 150" />
+        <path class="line" d="M180 180 Q420 170 760 170" />
+        <path class="line" d="M520 150 Q650 140 760 170" />
+        <path class="line" d="M520 150 Q480 230 330 300" />
+        <path class="line" d="M760 170 Q820 230 860 320" />
+        <path class="line" d="M580 250 Q700 290 860 320" />
+
+        <path class="flow" d="M180 180 Q360 140 520 150" />
+        <path class="flow" d="M180 180 Q420 170 760 170" />
+        <path class="flow" d="M520 150 Q480 230 330 300" />
+        <path class="flow" d="M760 170 Q820 230 860 320" />
+      </svg>
+
+      <span class="node hub" style="--x:20%;--y:43%;--d:0s"></span>
+      <span class="node hub" style="--x:58%;--y:36%;--d:.7s"></span>
+      <span class="node hub warm" style="--x:84%;--y:41%;--d:1.2s"></span>
+      <span class="node mint" style="--x:36%;--y:72%;--d:1.8s"></span>
+      <span class="node warm" style="--x:95%;--y:75%;--d:2.4s"></span>
+    </div>
+  </section>
+
   <section class="grid-two section reveal delay-2" id="spor">
     <article class="panel home-choice">
       <p class="eyebrow">Bedriftsløp</p>
