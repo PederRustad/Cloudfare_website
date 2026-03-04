@@ -1014,6 +1014,26 @@ a {
   border-color: rgba(247, 147, 26, 0.35);
 }
 
+.home-clean .home-choice,
+.home-clean .cta-box {
+  padding: 1rem 1.05rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  box-shadow: var(--shadow-card);
+}
+
+.home-clean .home-choice.panel-accent,
+.home-clean .cta-box.panel-accent {
+  border-color: rgba(247, 147, 26, 0.42);
+  background: linear-gradient(160deg, rgba(32, 24, 12, 0.52), rgba(15, 24, 39, 0.84));
+}
+
+.home-clean .home-choice:hover,
+.home-clean .cta-box:hover {
+  border-color: rgba(247, 147, 26, 0.46);
+}
+
 .home-clean .offer-grid {
   grid-template-columns: 1fr;
   gap: 0;
