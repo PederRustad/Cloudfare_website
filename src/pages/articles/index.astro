@@ -1,30 +1,20 @@
 ---
 import SiteLayout from "../../layouts/SiteLayout.astro";
-import ArticleCard from "../../components/ArticleCard.astro";
-import { articles } from "../../data/articles";
-
-const sortedArticles = [...articles].sort((a, b) =>
-  a.published > b.published ? -1 : 1
-);
 ---
 
 <SiteLayout
   title="Artikkelarkiv | Bitcoin Strategi"
-  description="Arkiv med artikler om bitcoinstrategi, risiko og gjennomføring."
+  description="Artikkelarkiv er flyttet til innsikt."
 >
   <section class="hero reveal delay-1 section">
     <p class="eyebrow">Artikkelarkiv</p>
     <h1>Innholdet er flyttet til Innsikt.</h1>
     <p class="lead">
-      Vi har samlet nytt og oppdatert innhold under <a href="/innsikt">/innsikt</a>.
-      Denne siden beholdes som arkiv for eksisterende lenker.
+      Du blir sendt videre til <a href="/innsikt">/innsikt</a>. Hvis du ikke blir
+      sendt automatisk, bruk knappen under.
     </p>
     <div class="inline-actions">
       <a class="btn primary" href="/innsikt">Gå til Innsikt</a>
     </div>
-  </section>
-
-  <section class="article-list section reveal delay-2">
-    {sortedArticles.map((article) => <ArticleCard article={article} basePath="/articles" />)}
   </section>
 </SiteLayout>

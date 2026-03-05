@@ -9,8 +9,7 @@ const staticPaths = [
   "/enterprise",
   "/compliance",
   "/bransjer",
-  "/innsikt",
-  "/articles"
+  "/innsikt"
 ];
 
 export const GET: APIRoute = ({ site }) => {
@@ -18,7 +17,6 @@ export const GET: APIRoute = ({ site }) => {
 
   const urls = [
     ...staticPaths,
-    ...articles.map((article) => `/articles/${article.slug}`),
     ...articles.map((article) => `/innsikt/${article.slug}`)
   ];
 
