@@ -262,12 +262,110 @@ a {
   box-shadow: inset 0 0 0 999px rgba(0, 0, 0, 0.04);
 }
 
+.page-home {
+  background: #efefef;
+}
+
+.page-home::before,
+.page-home .noise,
+.page-home .aurora {
+  display: none;
+}
+
+.page-home .site-footer {
+  display: none;
+}
+
+.site-header.home-nav-only {
+  justify-content: center;
+  border-bottom: 0;
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  padding-top: 1.35rem;
+}
+
+.site-header.home-nav-only .site-nav {
+  gap: 1.45rem;
+}
+
+.site-header.home-nav-only .site-nav a {
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+  color: #111111;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+}
+
+.site-header.home-nav-only .site-nav a:hover,
+.site-header.home-nav-only .site-nav a:focus-visible,
+.site-header.home-nav-only .site-nav a.active {
+  border: 0;
+  box-shadow: none;
+  color: #000000;
+  font-weight: 700;
+}
+
 .page-shell {
   padding: 0.6rem 0 3.6rem;
 }
 
 .section {
   margin-top: 2.2rem;
+}
+
+.home-minimal {
+  min-height: calc(100vh - 150px);
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  text-align: center;
+  gap: 1.4rem;
+  padding: 2.2rem 0 4rem;
+}
+
+.home-logo {
+  width: clamp(3.4rem, 5vw, 4.6rem);
+  color: #000000;
+}
+
+.home-logo svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.home-statement {
+  max-width: 22ch;
+  margin: 0;
+  color: #111111;
+  font-family: "Pilat Wide", "Cash Sans", sans-serif;
+  font-size: clamp(1.65rem, 3.2vw, 3.25rem);
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
+.home-links {
+  margin-top: 0.6rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.45rem;
+}
+
+.home-links a {
+  text-decoration: none;
+  color: #111111;
+  font: 500 0.74rem/1 "Cash Sans Mono", monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.home-links a:hover,
+.home-links a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .hero {
@@ -800,6 +898,20 @@ a {
     width: 100%;
   }
 
+  .site-header.home-nav-only {
+    justify-content: flex-start;
+    padding-top: 0.8rem;
+  }
+
+  .site-header.home-nav-only .site-nav {
+    gap: 0.25rem;
+  }
+
+  .site-header.home-nav-only .site-nav a {
+    width: 100%;
+    padding: 0.35rem 0;
+  }
+
   .grid-two,
   .grid-three,
   .offer-grid,
@@ -825,6 +937,20 @@ a {
 }
 
 @media (max-width: 640px) {
+  .home-minimal {
+    min-height: calc(100vh - 128px);
+    padding-top: 1.6rem;
+  }
+
+  .home-statement {
+    max-width: 20ch;
+    font-size: clamp(1.5rem, 8.3vw, 2.25rem);
+  }
+
+  .home-links {
+    gap: 1rem;
+  }
+
   .hero h1 {
     font-size: clamp(1.72rem, 10vw, 2.6rem);
   }

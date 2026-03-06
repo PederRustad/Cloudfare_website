@@ -4,6 +4,7 @@ const pathname = Astro.url.pathname;
 const links = [
   { href: "/", label: "Hjem" },
   { href: "/smb", label: "For bedrifter" },
+  { href: "/contact?segment=privat", label: "For privatpersoner" },
   { href: "/enterprise", label: "Større selskap" },
   { href: "/compliance", label: "Rammeverk" },
   { href: "/bransjer", label: "Bransjer" },
@@ -12,30 +13,36 @@ const links = [
 ];
 
 function isActive(path: string, href: string): boolean {
-  if (href === "/") {
+  const hrefPath = href.split("?")[0];
+
+  if (hrefPath === "/") {
     return path === "/";
   }
 
-  return path === href || path.startsWith(`${href}/`);
+  return path === hrefPath || path.startsWith(`${hrefPath}/`);
 }
 ---
 
-<header class="site-header">
-  <a class="brand" href="/" aria-label="Gå til forsiden">
-    <span class="brand-mark" aria-hidden="true">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none">
-        <rect x="10" y="10" width="24" height="24" rx="4" stroke="currentColor" stroke-width="6"></rect>
-        <rect x="46" y="10" width="24" height="24" rx="4" stroke="currentColor" stroke-width="6"></rect>
-        <rect x="10" y="46" width="24" height="24" rx="4" stroke="currentColor" stroke-width="6"></rect>
-        <rect x="46" y="46" width="24" height="24" rx="4" fill="currentColor"></rect>
-        <path d="M34 22h12M22 34v12M58 34v12M34 58h12" stroke="currentColor" stroke-width="6" stroke-linecap="round"></path>
-      </svg>
-    </span>
-    <span class="brand-copy">
-      bitcoinstrategi.no
-      <small>Strategisk bitcoin-rådgivning</small>
-    </span>
-  </a>
+<header class={pathname === "/" ? "site-header home-nav-only" : "site-header"}>
+  {
+    pathname !== "/" && (
+      <a class="brand" href="/" aria-label="Gå til forsiden">
+        <span class="brand-mark" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none">
+            <rect x="10" y="10" width="24" height="24" rx="4" stroke="currentColor" stroke-width="6"></rect>
+            <rect x="46" y="10" width="24" height="24" rx="4" stroke="currentColor" stroke-width="6"></rect>
+            <rect x="10" y="46" width="24" height="24" rx="4" stroke="currentColor" stroke-width="6"></rect>
+            <rect x="46" y="46" width="24" height="24" rx="4" fill="currentColor"></rect>
+            <path d="M34 22h12M22 34v12M58 34v12M34 58h12" stroke="currentColor" stroke-width="6" stroke-linecap="round"></path>
+          </svg>
+        </span>
+        <span class="brand-copy">
+          bitcoinstrategi.no
+          <small>Strategisk bitcoin-rådgivning</small>
+        </span>
+      </a>
+    )
+  }
 
   <button class="menu-trigger" aria-label="Åpne meny" data-menu-trigger>
     Meny
