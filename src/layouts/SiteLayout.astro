@@ -12,6 +12,7 @@ const { title, description } = Astro.props;
 const canonical = Astro.site
   ? new URL(Astro.url.pathname, Astro.site).toString()
   : Astro.url.href;
+const isHome = Astro.url.pathname === "/";
 ---
 
 <!doctype html>
@@ -29,7 +30,7 @@ const canonical = Astro.site
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
-  <body>
+  <body class={isHome ? "page-home" : ""}>
     <div class="noise" aria-hidden="true"></div>
     <div class="aurora aurora-a" aria-hidden="true"></div>
     <div class="aurora aurora-b" aria-hidden="true"></div>
