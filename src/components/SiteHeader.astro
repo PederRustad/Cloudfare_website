@@ -4,6 +4,7 @@ const pathname = Astro.url.pathname;
 const links = [
   { href: "/", label: "Hjem" },
   { href: "/smb", label: "For bedrifter" },
+  { href: "/contact?segment=privat", label: "For privatpersoner" },
   { href: "/enterprise", label: "Større selskap" },
   { href: "/compliance", label: "Rammeverk" },
   { href: "/bransjer", label: "Bransjer" },
@@ -12,11 +13,13 @@ const links = [
 ];
 
 function isActive(path: string, href: string): boolean {
-  if (href === "/") {
+  const hrefPath = href.split("?")[0];
+
+  if (hrefPath === "/") {
     return path === "/";
   }
 
-  return path === href || path.startsWith(`${href}/`);
+  return path === hrefPath || path.startsWith(`${hrefPath}/`);
 }
 ---
 
