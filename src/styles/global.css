@@ -181,13 +181,16 @@ a {
 .brand-mark {
   width: 1.7rem;
   aspect-ratio: 1;
-  border-radius: 999px;
-  display: grid;
-  place-items: center;
-  color: #111;
-  font: 700 0.84rem/1 "Space Mono", monospace;
-  background: radial-gradient(circle at 35% 32%, #ffe1b6 0%, #f7931a 66%);
-  box-shadow: 0 0 0 4px rgba(247, 147, 26, 0.18);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink);
+}
+
+.brand-mark svg {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .brand-copy {

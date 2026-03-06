@@ -22,7 +22,15 @@ function isActive(path: string, href: string): boolean {
 
 <header class="site-header">
   <a class="brand" href="/" aria-label="Gå til forsiden">
-    <span class="brand-mark" aria-hidden="true">B</span>
+    <span class="brand-mark" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none">
+        <rect x="10" y="10" width="24" height="24" rx="4" stroke="currentColor" stroke-width="6"></rect>
+        <rect x="46" y="10" width="24" height="24" rx="4" stroke="currentColor" stroke-width="6"></rect>
+        <rect x="10" y="46" width="24" height="24" rx="4" stroke="currentColor" stroke-width="6"></rect>
+        <rect x="46" y="46" width="24" height="24" rx="4" fill="currentColor"></rect>
+        <path d="M34 22h12M22 34v12M58 34v12M34 58h12" stroke="currentColor" stroke-width="6" stroke-linecap="round"></path>
+      </svg>
+    </span>
     <span class="brand-copy">
       bitcoinstrategi.no
       <small>Strategisk bitcoin-rådgivning</small>
