@@ -15,46 +15,28 @@ const articleData = article ?? getArticleBySlug(Astro.params.slug ?? "");
 if (!articleData) {
   throw new Error("Artikkel ikke funnet");
 }
+
+const target = `/innsikt/${articleData.slug}`;
 ---
 
-<SiteLayout title={`${articleData.title} | Bitcoin Strategi`} description={articleData.description}>
-  <article class="article-page section reveal delay-1">
-    <p class="pill">{articleData.category}</p>
-    <h1>{articleData.title}</h1>
-    <div class="meta-row">
-      <span>{articleData.readTime}</span>
-      <span>{new Date(articleData.published).toLocaleDateString("nb-NO")}</span>
+<SiteLayout
+  title={`${articleData.title} | Bitcoin Strategi`}
+  description={articleData.description}
+  canonicalPath={target}
+  noindex
+>
+  <meta slot="head" http-equiv="refresh" content={`0;url=${target}`} />
+
+  <section class="hero reveal delay-1 section">
+    <p class="eyebrow">Omdirigering</p>
+    <h1>Denne artikkelen er flyttet.</h1>
+    <p class="lead">
+      Du blir sendt videre til <a href={target}>{target}</a>. Hvis ikke, bruk
+      knappen under.
+    </p>
+    <div class="inline-actions">
+      <a class="btn primary" href={target}>Gå til artikkelen</a>
+      <a class="btn ghost" href="/innsikt">Til Innsikt</a>
     </div>
-
-    <p>{articleData.description}</p>
-    <p class="article-lead">{articleData.intro}</p>
-
-    <h2 class="section">Kortversjon</h2>
-    <ul class="simple-list key-points">
-      {articleData.bullets.map((bullet) => <li>{bullet}</li>)}
-    </ul>
-
-    {
-      articleData.sections.map((section) => (
-        <section class="article-block section">
-          <h2>{section.heading}</h2>
-          {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
-          {
-            section.checklist && (
-              <ul class="simple-list">
-                {section.checklist.map((item) => <li>{item}</li>)}
-              </ul>
-            )
-          }
-        </section>
-      ))
-    }
-
-    <p class="copy">{articleData.conclusion}</p>
-
-    <div class="inline-actions section">
-      <a class="btn ghost" href="/articles">Tilbake til artikler</a>
-      <a class="btn primary" href="/contact">Kontakt oss</a>
-    </div>
-  </article>
+  </section>
 </SiteLayout>

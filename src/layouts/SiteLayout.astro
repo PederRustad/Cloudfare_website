@@ -6,12 +6,21 @@ import "../styles/global.css";
 interface Props {
   title: string;
   description: string;
+  canonicalPath?: string;
+  noindex?: boolean;
 }
 
-const { title, description } = Astro.props;
-const canonical = Astro.site
-  ? new URL(Astro.url.pathname, Astro.site).toString()
-  : Astro.url.href;
+const {
+  title,
+  description,
+  canonicalPath,
+  noindex = false
+} = Astro.props;
+const canonical = canonicalPath
+  ? new URL(canonicalPath, Astro.site ?? Astro.url).toString()
+  : Astro.site
+    ? new URL(Astro.url.pathname, Astro.site).toString()
+    : Astro.url.href;
 const isHome = Astro.url.pathname === "/";
 ---
 
@@ -28,7 +37,9 @@ const isHome = Astro.url.pathname === "/";
     <meta property="og:url" content={canonical} />
     <meta name="theme-color" content="#ffffff" />
     <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex,follow" />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <slot name="head" />
   </head>
   <body class={isHome ? "page-home" : ""}>
     <div class="noise" aria-hidden="true"></div>
