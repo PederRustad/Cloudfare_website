@@ -5,7 +5,7 @@ const segment = Astro.url.searchParams.get("segment");
 const links = [
   { href: "/", label: "Hjem" },
   { href: "/smb", label: "For bedrifter" },
-  { href: "/contact?segment=privat", label: "For privatpersoner" },
+  { href: "/privat", label: "For privatpersoner" },
   { href: "/compliance", label: "Rammeverk" },
   { href: "/bransjer", label: "Bransjer" },
   { href: "/innsikt", label: "Innsikt" },
@@ -23,6 +23,10 @@ function isActive(path: string, currentSegment: string | null, href: string): bo
 
   if (hrefPath === "/") {
     return path === "/";
+  }
+
+  if (hrefPath === "/privat") {
+    return path === "/privat" || (path === "/contact" && currentSegment === "privat");
   }
 
   if (path !== hrefPath && !path.startsWith(`${hrefPath}/`)) {
