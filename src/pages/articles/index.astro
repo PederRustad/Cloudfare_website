@@ -1,20 +1,26 @@
 ---
 import SiteLayout from "../../layouts/SiteLayout.astro";
+
+const target = "/innsikt";
 ---
 
 <SiteLayout
   title="Artikkelarkiv | Bitcoin Strategi"
   description="Artikkelarkiv er flyttet til innsikt."
+  canonicalPath={target}
+  noindex
 >
+  <meta slot="head" http-equiv="refresh" content={`0;url=${target}`} />
+
   <section class="hero reveal delay-1 section">
-    <p class="eyebrow">Artikkelarkiv</p>
-    <h1>Innholdet er flyttet til Innsikt.</h1>
+    <p class="eyebrow">Omdirigering</p>
+    <h1>Artikkelarkivet er flyttet til Innsikt.</h1>
     <p class="lead">
-      Du blir sendt videre til <a href="/innsikt">/innsikt</a>. Hvis du ikke blir
-      sendt automatisk, bruk knappen under.
+      Du blir sendt videre til <a href={target}>{target}</a>. Hvis ikke, bruk
+      knappen under.
     </p>
     <div class="inline-actions">
-      <a class="btn primary" href="/innsikt">Gå til Innsikt</a>
+      <a class="btn primary" href={target}>Gå til Innsikt</a>
     </div>
   </section>
 </SiteLayout>

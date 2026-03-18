@@ -1,25 +1,39 @@
 ---
 const pathname = Astro.url.pathname;
+const segment = Astro.url.searchParams.get("segment");
 
 const links = [
   { href: "/", label: "Hjem" },
   { href: "/smb", label: "For bedrifter" },
-  { href: "/contact?segment=privat", label: "For privatpersoner" },
-  { href: "/enterprise", label: "Større selskap" },
+  { href: "/privat", label: "For privatpersoner" },
   { href: "/compliance", label: "Rammeverk" },
   { href: "/bransjer", label: "Bransjer" },
   { href: "/innsikt", label: "Innsikt" },
   { href: "/contact", label: "Kontakt" }
 ];
 
-function isActive(path: string, href: string): boolean {
-  const hrefPath = href.split("?")[0];
+function isActive(path: string, currentSegment: string | null, href: string): boolean {
+  const hrefUrl = new URL(href, Astro.url);
+  const hrefPath = hrefUrl.pathname;
+  const hrefSegment = hrefUrl.searchParams.get("segment");
+
+  if (hrefSegment) {
+    return path === hrefPath && currentSegment === hrefSegment;
+  }
 
   if (hrefPath === "/") {
     return path === "/";
   }
 
-  return path === hrefPath || path.startsWith(`${hrefPath}/`);
+  if (hrefPath === "/privat") {
+    return path === "/privat" || (path === "/contact" && currentSegment === "privat");
+  }
+
+  if (path !== hrefPath && !path.startsWith(`${hrefPath}/`)) {
+    return false;
+  }
+
+  return currentSegment === null;
 }
 ---
 
@@ -52,7 +66,7 @@ function isActive(path: string, href: string): boolean {
     {
       links.map((link) => (
         <a
-          class={isActive(pathname, link.href) ? "active" : ""}
+          class={isActive(pathname, segment, link.href) ? "active" : ""}
           href={link.href}
         >
           {link.label}

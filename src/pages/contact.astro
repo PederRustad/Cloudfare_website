@@ -1,18 +1,36 @@
 ---
 import SiteLayout from "../layouts/SiteLayout.astro";
+
+const segment = Astro.url.searchParams.get("segment");
+const isPrivate = segment === "privat";
+const title = isPrivate
+  ? "Kontakt for privatpersoner | Bitcoin Strategi"
+  : "Kontakt | Bitcoin Strategi";
+const description = isPrivate
+  ? "Book avklaringsmøte som privatperson og få anbefalt neste steg."
+  : "Book strategimøte for bedrifter og få anbefalt neste steg.";
+const heading = isPrivate
+  ? "Book et avklaringsmøte for privatpersoner."
+  : "Book strategimøte for bedrifter.";
+const lead = isPrivate
+  ? "Del litt om situasjonen din, så foreslår vi riktig neste steg rundt strategi, kjøpsplan og custody."
+  : "Del litt om virksomheten deres, så foreslår vi riktig løp og neste konkrete steg.";
+const formHeading = isPrivate
+  ? "Fortell oss om situasjonen din"
+  : "Fortell oss om bedriften";
+const directCopy = isPrivate
+  ? 'Foretrekker du å starte på e-post, skriv "privat" i emnefeltet.'
+  : 'Foretrekker dere et kort avklaringsmøte først, skriv "avklaringsmøte" i emnefeltet.';
 ---
 
 <SiteLayout
-  title="Kontakt | Bitcoin Strategi"
-  description="Book strategimøte for bedrifter eller enterprise og få anbefalt neste steg."
+  title={title}
+  description={description}
 >
   <section class="hero reveal delay-1 section">
     <p class="eyebrow">Kontakt</p>
-    <h1>Book strategimøte for bedrifter eller enterprise.</h1>
-    <p class="lead">
-      Del litt om virksomheten deres, så foreslår vi riktig løp og neste
-      konkrete steg.
-    </p>
+    <h1>{heading}</h1>
+    <p class="lead">{lead}</p>
   </section>
 
   <section class="contact-grid section reveal delay-2">
@@ -21,38 +39,65 @@ import SiteLayout from "../layouts/SiteLayout.astro";
       <h2>E-post</h2>
       <p><a href="mailto:hello@bitcoinstrategi.no">hello@bitcoinstrategi.no</a></p>
       <p>Normal svartid: innen 1-2 virkedager.</p>
-      <p class="copy">
-        Foretrekker dere et kort avklaringsmøte først, skriv "avklaringsmøte" i
-        emnefeltet.
-      </p>
+      <p class="copy">{directCopy}</p>
     </article>
 
     <article class="contact-card">
       <p class="eyebrow">Kvalifisering</p>
-      <h2>Fortell oss om bedriften</h2>
+      <h2>{formHeading}</h2>
       <form class="contact-form" action="#" method="post">
-        <label for="company">Selskap</label>
-        <input id="company" name="company" type="text" placeholder="Firmanavn AS" />
+        <input type="hidden" name="segment" value={isPrivate ? "privat" : "bedrift"} />
 
-        <label for="role">Din rolle</label>
-        <input id="role" name="role" type="text" placeholder="CEO, CFO, styreleder..." />
+        {
+          isPrivate ? (
+            <>
+              <label for="name">Navn</label>
+              <input id="name" name="name" type="text" placeholder="Fornavn Etternavn" />
 
-        <label for="size">Størrelse</label>
-        <select id="size" name="size">
-          <option value="">Velg størrelse</option>
-          <option value="1-49">1-49 ansatte</option>
-          <option value="50-249">50-249 ansatte</option>
-          <option value="250+">250+ ansatte</option>
-        </select>
+              <label for="experience">Erfaring</label>
+              <select id="experience" name="experience">
+                <option value="">Velg nivå</option>
+                <option value="new">Helt ny</option>
+                <option value="some">Har kjøpt litt før</option>
+                <option value="experienced">Har erfaring og vil stramme opp planen</option>
+              </select>
 
-        <label for="objective">Mål</label>
-        <select id="objective" name="objective">
-          <option value="">Velg mål</option>
-          <option value="policy">Bygge policy og risikoramme</option>
-          <option value="treasury">Etablere treasury-modell</option>
-          <option value="compliance">Compliance og internkontroll</option>
-          <option value="workshop">Styre-/lederworkshop</option>
-        </select>
+              <label for="objective">Tema</label>
+              <select id="objective" name="objective">
+                <option value="">Velg tema</option>
+                <option value="principles">Forstå første prinsipper</option>
+                <option value="plan">Lage kjøps- og risikoplan</option>
+                <option value="custody">Custody og oppbevaring</option>
+                <option value="structure">Strukturere eksisterende eksponering</option>
+              </select>
+            </>
+          ) : (
+            <>
+              <label for="company">Selskap</label>
+              <input id="company" name="company" type="text" placeholder="Firmanavn AS" />
+
+              <label for="role">Din rolle</label>
+              <input id="role" name="role" type="text" placeholder="CEO, CFO, styreleder..." />
+
+              <label for="size">Størrelse</label>
+              <select id="size" name="size">
+                <option value="">Velg størrelse</option>
+                <option value="1-49">1-49 ansatte</option>
+                <option value="50-249">50-249 ansatte</option>
+                <option value="250+">250+ ansatte</option>
+              </select>
+
+              <label for="objective">Mål</label>
+              <select id="objective" name="objective">
+                <option value="">Velg mål</option>
+                <option value="policy">Bygge policy og risikoramme</option>
+                <option value="treasury">Etablere treasury-modell</option>
+                <option value="compliance">Compliance og internkontroll</option>
+                <option value="workshop">Styre-/lederworkshop</option>
+              </select>
+            </>
+          )
+        }
 
         <label for="timeline">Tidshorisont</label>
         <select id="timeline" name="timeline">
@@ -63,14 +108,23 @@ import SiteLayout from "../layouts/SiteLayout.astro";
         </select>
 
         <label for="email">E-post</label>
-        <input id="email" name="email" type="email" placeholder="deg@firma.no" />
+        <input
+          id="email"
+          name="email"
+          type="email"
+          placeholder={isPrivate ? "deg@example.no" : "deg@firma.no"}
+        />
 
         <label for="message">Melding</label>
         <textarea
           id="message"
           name="message"
           rows="5"
-          placeholder="Kort om nåsituasjon, mål og hva dere trenger hjelp til."
+          placeholder={
+            isPrivate
+              ? "Kort om nåsituasjon, mål og hva du vil ha hjelp til."
+              : "Kort om nåsituasjon, mål og hva dere trenger hjelp til."
+          }
         ></textarea>
 
         <button class="btn primary" type="submit">Send forespørsel</button>
