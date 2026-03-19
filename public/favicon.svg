@@ -2,6 +2,6 @@
   <rect x="10" y="10" width="24" height="24" rx="4" stroke="#111111" stroke-width="6"></rect>
   <rect x="46" y="10" width="24" height="24" rx="4" stroke="#111111" stroke-width="6"></rect>
   <rect x="10" y="46" width="24" height="24" rx="4" stroke="#111111" stroke-width="6"></rect>
-  <rect x="46" y="46" width="24" height="24" rx="4" stroke="#111111" stroke-width="6"></rect>
+  <rect x="46" y="46" width="24" height="24" rx="4" fill="#111111"></rect>
   <path d="M34 22h12M22 34v12M58 34v12M34 58h12" stroke="#111111" stroke-width="6" stroke-linecap="round"></path>
 </svg>
