@@ -689,6 +689,31 @@ a {
   resize: vertical;
 }
 
+.contact-form button[disabled] {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.form-trap {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.form-status {
+  margin: 0;
+  padding: 0.7rem 0.8rem;
+  border-left: 2px solid #000000;
+  background: var(--bg-soft);
+}
+
+.form-status.is-error {
+  border-left-color: #b42318;
+  color: #7a1a12;
+}
+
 .copy {
   color: #2f2f2f;
 }

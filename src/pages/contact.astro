@@ -1,11 +1,18 @@
 ---
 import SiteLayout from "../layouts/SiteLayout.astro";
+
+// Turnstile site key er offentlig og settes som byggvariabel i Cloudflare Pages.
+// Lokalt brukes Cloudflares testnøkkel som alltid godkjenner.
+const turnstileSiteKey =
+  import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? (import.meta.env.DEV ? "1x00000000000000000000AA" : "");
 ---
 
 <SiteLayout
   title="Kontakt | Bitcoin Strategi"
   description="Book strategimøte for bedrifter og få anbefalt neste steg."
 >
+  <script slot="head" src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
   <section class="hero reveal delay-1 section">
     <p class="eyebrow">Kontakt</p>
     <h1>Book strategimøte for bedrifter.</h1>
@@ -24,58 +31,116 @@ import SiteLayout from "../layouts/SiteLayout.astro";
     <article class="contact-card">
       <p class="eyebrow">Kvalifisering</p>
       <h2>Fortell oss om bedriften</h2>
-      <form class="contact-form" action="#" method="post">
-        <input type="hidden" name="segment" value="bedrift" />
+      <form class="contact-form" action="/api/contact" method="post" data-contact-form>
+        <label for="name">Navn</label>
+        <input id="name" name="name" type="text" autocomplete="name" maxlength="200" placeholder="Fornavn Etternavn" />
 
         <label for="company">Selskap</label>
-        <input id="company" name="company" type="text" placeholder="Firmanavn AS" />
+        <input id="company" name="company" type="text" autocomplete="organization" maxlength="200" placeholder="Firmanavn AS" />
 
         <label for="role">Din rolle</label>
-        <input id="role" name="role" type="text" placeholder="CEO, CFO, styreleder..." />
+        <input id="role" name="role" type="text" autocomplete="organization-title" maxlength="200" placeholder="CEO, CFO, styreleder..." />
 
         <label for="size">Størrelse</label>
         <select id="size" name="size">
           <option value="">Velg størrelse</option>
-          <option value="1-49">1-49 ansatte</option>
-          <option value="50-249">50-249 ansatte</option>
-          <option value="250+">250+ ansatte</option>
+          <option value="1-49 ansatte">1-49 ansatte</option>
+          <option value="50-249 ansatte">50-249 ansatte</option>
+          <option value="250+ ansatte">250+ ansatte</option>
         </select>
 
         <label for="objective">Mål</label>
         <select id="objective" name="objective">
           <option value="">Velg mål</option>
-          <option value="policy">Bygge policy og risikoramme</option>
-          <option value="treasury">Etablere treasury-modell</option>
-          <option value="compliance">Compliance og internkontroll</option>
-          <option value="workshop">Styre-/lederworkshop</option>
+          <option value="Bygge policy og risikoramme">Bygge policy og risikoramme</option>
+          <option value="Etablere treasury-modell">Etablere treasury-modell</option>
+          <option value="Compliance og internkontroll">Compliance og internkontroll</option>
+          <option value="Styre-/lederworkshop">Styre-/lederworkshop</option>
         </select>
 
         <label for="timeline">Tidshorisont</label>
         <select id="timeline" name="timeline">
           <option value="">Velg tidshorisont</option>
-          <option value="0-30">0-30 dager</option>
-          <option value="30-90">30-90 dager</option>
-          <option value="90+">90+ dager</option>
+          <option value="0-30 dager">0-30 dager</option>
+          <option value="30-90 dager">30-90 dager</option>
+          <option value="90+ dager">90+ dager</option>
         </select>
 
-        <label for="email">E-post</label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          placeholder="deg@firma.no"
-        />
+        <label for="email">E-post (påkrevd)</label>
+        <input id="email" name="email" type="email" autocomplete="email" maxlength="320" placeholder="deg@firma.no" required />
 
-        <label for="message">Melding</label>
+        <label for="message">Melding (påkrevd)</label>
         <textarea
           id="message"
           name="message"
           rows="5"
+          maxlength="5000"
           placeholder="Kort om nåsituasjon, mål og hva dere trenger hjelp til."
+          required
         ></textarea>
 
+        <div class="form-trap" aria-hidden="true">
+          <label for="website">Ikke fyll ut dette feltet</label>
+          <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-language="no"></div>
+
         <button class="btn primary" type="submit">Send forespørsel</button>
+        <p class="form-status" role="status" aria-live="polite" data-form-status hidden></p>
+
+        <noscript>
+          <p class="form-status is-error">
+            Skjemaet krever JavaScript. Send oss heller en e-post til
+            <a href="mailto:hello@bitcoinstrategi.no">hello@bitcoinstrategi.no</a>.
+          </p>
+        </noscript>
       </form>
     </article>
   </section>
 </SiteLayout>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>("[data-contact-form]");
+  const status = form?.querySelector<HTMLElement>("[data-form-status]");
+  const button = form?.querySelector<HTMLButtonElement>("button[type=submit]");
+
+  function showStatus(message: string, isError: boolean) {
+    if (!status) return;
+    status.textContent = message;
+    status.classList.toggle("is-error", isError);
+    status.hidden = false;
+  }
+
+  form?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!button) return;
+
+    button.disabled = true;
+    button.textContent = "Sender…";
+    status && (status.hidden = true);
+
+    try {
+      const res = await fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" }
+      });
+      const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
+
+      if (res.ok && data.ok) {
+        form.reset();
+        showStatus("Takk! Vi har mottatt forespørselen og svarer innen 1-2 virkedager.", false);
+      } else {
+        showStatus(data.error ?? "Noe gikk galt. Prøv igjen, eller send oss en e-post.", true);
+      }
+    } catch {
+      showStatus("Fikk ikke kontakt. Sjekk nettforbindelsen og prøv igjen.", true);
+    } finally {
+      // Turnstile-token kan bare brukes én gang.
+      (window as unknown as { turnstile?: { reset: () => void } }).turnstile?.reset();
+      button.disabled = false;
+      button.textContent = "Send forespørsel";
+    }
+  });
+</script>
