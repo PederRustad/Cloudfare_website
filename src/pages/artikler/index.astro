@@ -1,0 +1,39 @@
+---
+import { getCollection } from "astro:content";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+
+const artikler = (await getCollection("artikler", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.published.valueOf() - a.data.published.valueOf()
+);
+---
+
+<SiteLayout
+  title="Artikler | Bitcoin Strategi"
+  description="Artikler fra Bitcoin Strategi om bitcoin, risiko og strategi."
+>
+  <section class="hero reveal delay-1 section">
+    <h1>Våre artikler</h1>
+  </section>
+
+  <section class="section reveal delay-2">
+    {
+      artikler.length === 0 ? (
+        <p class="lead">Artikler kommer snart.</p>
+      ) : (
+        <ul class="artikkel-liste">
+          {artikler.map((artikkel) => (
+            <li>
+              <a href={`/artikler/${artikkel.id}`}>
+                <h2>{artikkel.data.title}</h2>
+              </a>
+              <p>{artikkel.data.description}</p>
+              <time datetime={artikkel.data.published.toISOString()}>
+                {artikkel.data.published.toLocaleDateString("nb-NO", { dateStyle: "long" })}
+              </time>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </section>
+</SiteLayout>

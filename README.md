@@ -78,3 +78,13 @@ Use `public/_redirects` and extend it with every important old URL:
 
 - Edit page files in `src/pages`
 - Edit article list in `src/data/articles.ts`
+
+## Legge til en artikkel
+
+1. Kopier `src/content/artikler/_mal.md` til en ny fil, f.eks. `src/content/artikler/hva-er-bitcoin.md`.
+   Filnavnet blir adressen: `/artikler/hva-er-bitcoin`.
+2. Fyll inn `title`, `description` og `published` øverst, og skriv teksten i Markdown under.
+3. Sett `draft: true` for å skjule en artikkel som ikke er ferdig.
+4. Commit og push. Artikkelen vises automatisk på `/artikler` (nyeste først) og i sitemap.
+
+Filer som starter med `_` blir ikke publisert.
